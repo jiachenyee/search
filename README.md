@@ -3,16 +3,30 @@
 
 ### Usage
 
-The function returns back a UIViewController
+#### If you want the function to return a UIViewController
+This uses `SafariServices` to return a UIViewController therefore, you can just use `present()`
 ``` swift
-String.search(searchEngine: .duckduckgo)
+String.searchVC(searchEngine: .duckduckgo)
 
 // E.g.
-"Hello World".search(searchEngine: .google)
+"Hello World".searchVC(searchEngine: .google) // Type UIViewController
 ```
 You can present the ViewController using
 ``` swift
-present("Hello World".search(searchEngine: .google), animated: true, completion: nil)
+present("Hello World".searchVC(searchEngine: .google), animated: true, completion: nil)
+```
+
+#### If you want the function to return a **URL**
+This allows you to open a URL, for example if you want to open a URL inside the Safari app instead of using `SafariServices` for some reason
+``` swift
+String.searchURL(searchEngine: .duckduckgo)
+
+// E.g.
+"Hello World".searchURL(searchEngine: .google) // Type URL
+```
+You can open the URL in the Safari app by
+``` swift
+UIApplication.shared.open("Hello".searchURL(searchEngine: .duckduckgo))
 ```
 
 ---
@@ -21,19 +35,3 @@ present("Hello World".search(searchEngine: .google), animated: true, completion:
 - DuckDuckGo `.duckduckgo`
 - Bing `.bing`
 - Yahoo `.yahoo`
-
----
-### Additional Info
-- This uses SafariServices 
-- In order to return a URL, 
-``` swift
-func search(searchEngine: searchEngines) -> UIViewController {
-// CHANGE IT TO
-func search(searchEngine: searchEngines) -> URL {
-
-// AND
-
-return safariViewController
-// CHANGE IT TO
-return url
-```
